@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+      
+    </head>
+    <body>
+        <svg xmlns="http://www.w3.org/2000/svg" xml:lang="en" 
+     height="60cm" width="60cm" id="my-svg">
+    <title>Line Art</title>
+    <style type="text/css">
+        line {
+            stroke: rgb(94, 63, 94);
+        }
+        line2 {
+            stroke: rgb(80, 94, 63);
+        }
+        svg {
+            margin: 1cm;
+        }
+    </style>
+    <script>
+        <![CDATA[
+(function(){
+        var size = 10;
+        var doc = document;
+        var svg = doc.querySelector("svg");
+        var svgNS = svg.namespaceURI;
+
+        if (!(svg.classList && svg.classList.contains("initialized") ) ) 
+            draw();
+
+        function draw(){
+            var l1, l2,l3;
+            for (var i = 0; i <= size; i++) {
+                l1 = doc.createElementNS(svgNS, "line");
+                l1.setAttribute("x1", i + "cm" );
+                l1.setAttribute("x2", size + "cm" );   
+                l1.setAttribute("y1",  "0cm" );   
+                l1.setAttribute("y2", i + "cm" );
+                svg.appendChild(l1);
+                
+                a1 = doc.createElementNS(svgNS, "animate");
+                a1.setAttribute("attributeName","x2");
+                a1.setAttribute("from",size);
+                a1.setAttribute("to",i);
+                a1.setAttribute("begin",i+"s");
+                a1.setAttribute("dur","10s");
+                l1.appendChild(a1);
+                
+                a2 = doc.createElementNS(svgNS, "animate");
+                a2.setAttribute("attributeName","y2");
+                a1.setAttribute("from",0);
+                a2.setAttribute("to",i);
+                a2.setAttribute("begin",i+"s");
+                a2.setAttribute("dur","10s");
+                l1.appendChild(a2);
+                
+            }
+            if (svg.classList)
+                svg.classList.add("initialized");        
+        }
+})()
+]]>
+</script>
+</svg>
+
+    </body>
+</html>
